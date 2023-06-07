@@ -18,38 +18,34 @@ require 'cek.php';
 <body>
 <div class="container">
 			<h2>PT MAYORA</h2>
-			<h4>(Data Bahan Baku)</h4>
+			<h4>(Data Tenaga Kerja)</h4>
 				<div class="data-tables datatable-dark">
 					
-                            <div class="card-body">
+                <div class="card-body">
                                 <table id="mauexport">
                                     <thead>
                                         <tr>
-                                            <th>Id Bahan</th>
-                                            <th>Nama Bahan</th>
-                                            <th>Jumlah</th>
-                                            <th>Harga</th>
+                                            <th>Id Tenaga Kerja</th>
+                                            <th>Nama</th>
+                                            <th>Alamat</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                        $ambilsemuadatabahan = mysqli_query($conn, "select * from bahanbaku");
-                                        while($data=mysqli_fetch_array($ambilsemuadatabahan)){
-                                            $idbahan = $data['idbahan'];
-                                            $namabahan = $data['nama'];
-                                            $jumlahbahan = $data['jumlah'];
-                                            $hargabahan =$data['harga'];
+                                        $ambilsemuadatatenaga = mysqli_query($conn, "select * from tenagakerja");
+                                        while($data=mysqli_fetch_array($ambilsemuadatatenaga)){
+                                            $idt = $data['idtenaga'];
+                                            $namat = $data['nama'];
+                                            $alamat = $data['alamat'];
                                         ?>
                                         <tr>
-                                            <td><?=$idbahan;?></td>
-                                            <td><?=$namabahan;?></td>
-                                            <td><?=$jumlahbahan;?></td>
-                                            <td><?=$hargabahan;?></td>
+                                            <td><?=$idt; ?></td>
+                                            <td><?=$namat; ?></td>
+                                            <td><?=$alamat; ?></td>
                                         </tr>
-                                        
-                                    <?php
-                                    };
-                                    ?>
+                                        <?php
+                                        };
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

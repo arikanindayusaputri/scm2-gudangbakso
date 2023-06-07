@@ -18,7 +18,7 @@ require 'cek.php';
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.php">Dashboard Gudang Bakso</a>
+            <a class="navbar-brand ps-3" href="index.php">Dashboard PT Mayora</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         </nav>
@@ -112,11 +112,11 @@ require 'cek.php';
                                     </thead>
                                     <tbody>
                                     <?php
-                                        $ambilsemuadatabiaya = mysqli_query($conn, "select * from biaya i,bahanbaku b,tenagakerja t where b.id_bahan=i.id_bahan and t.id_tenaga_kerja=i.Id_Tenaga_Kerja");
+                                        $ambilsemuadatabiaya = mysqli_query($conn, "select * from biaya i,bahanbaku b,tenagakerja t where b.idbahan=i.idbahan and t.idtenaga=i.idtenaga");
                                         while($data=mysqli_fetch_array($ambilsemuadatabiaya)){
-                                            $idbiaya = $data['Id_Biaya_Produksi'];
-                                            $idb = $data['id_bahan'];
-                                            $idt = $data['Id_Tenaga_Kerja'];
+                                            $idbiaya = $data['idbiaya'];
+                                            $idb = $data['idbahan'];
+                                            $idt = $data['idtenaga'];
                                         ?>
                                         <tr>
                                             <td><?=$idbiaya;?></td>
@@ -146,11 +146,11 @@ require 'cek.php';
                                                     <!-- Modal body -->
                                                     <form method="post">
                                                     <div class="modal-body">
-                                                        <input type="text" name="Id_Biaya_Produksi" value="<?=$idbiaya;?>" class="form-control"required><br>
-                                                        <input type="text" name="id_bahan" value="<?=$idb;?>" class="form-control"required><br>
-                                                        <input type="text" name="Id_Tenaga_Kerja" value="<?=$idt;?>" class="form-control"required><br>
-                                                        <input type ="hidden" name="id_bahan" value="<?=$idb;?>">
-                                                        <input type ="hidden" name="Id_Tenaga_Kerja" value="<?=$idt;?>">
+                                                        <input type="text" name="idbiaya" value="<?=$idbiaya;?>" class="form-control"required><br>
+                                                        <input type="text" name="idbahan" value="<?=$idb;?>" class="form-control"required><br>
+                                                        <input type="text" name="idtenaga" value="<?=$idt;?>" class="form-control"required><br>
+                                                        <input type ="hidden" name="idbahan" value="<?=$idb;?>">
+                                                        <input type ="hidden" name="idtenaga" value="<?=$idt;?>">
                                                         <button type="submit" class="btn btn-primary" name="updatebia">submit</button>
                                                     </div>
                                                     </form>
@@ -173,7 +173,7 @@ require 'cek.php';
                                                     <form method="post">
                                                     <div class="modal-body">
                                                         Apakah Anda Yakin Ingin Menghapus <?=$idbiaya;?>?
-                                                        <input type="hidden" name="Id_Biaya_Produksi" value="<?=$idbiaya;?>">
+                                                        <input type="hidden" name="idbiaya" value="<?=$idbiaya;?>">
                                                         <br><br>
                                                         <button type="submit" class="btn btn-danger" name="hapusbiaya">Hapus</button>
                                                     </div>
@@ -227,13 +227,13 @@ require 'cek.php';
             <!-- Modal body -->
             <form method="post">
             <div class="modal-body">
-                <input type="text" name="Id_Biaya_Produksi" placeholder="Id Biaya" class="form-control"><br>
+                <input type="text" name="idbiaya" placeholder="Id Biaya" class="form-control"><br>
                 <select name="idba" class="form-control">
                     <?php
                         $ambildata =mysqli_query($conn,"select *from bahanbaku");
                         while($fetcharray =mysqli_fetch_array($ambildata)){
-                            $idb =$fetcharray['id_bahan'];
-                            $idb =$fetcharray['id_bahan'];
+                            $idb =$fetcharray['idbahan'];
+                            $idb =$fetcharray['idbahan'];
                     ?>
 
                     <option value="<?=$idb;?>"><?=$idb;?></option>
@@ -246,8 +246,8 @@ require 'cek.php';
                     <?php
                         $ambildata =mysqli_query($conn,"select *from tenagakerja");
                         while($fetcharray =mysqli_fetch_array($ambildata)){
-                            $idt =$fetcharray['id_tenaga_kerja'];
-                            $idt =$fetcharray['id_tenaga_kerja'];
+                            $idt =$fetcharray['idtenaga'];
+                            $idt =$fetcharray['idtenaga'];
                     ?>
 
                     <option value="<?=$idt;?>"><?=$idt;?></option>

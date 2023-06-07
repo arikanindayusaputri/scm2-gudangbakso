@@ -17,7 +17,7 @@ require 'cek.php';
 
 <body>
 <div class="container">
-			<h2>Gudang Bakso</h2>
+			<h2>PT MAYORA</h2>
 			<h4>(Data Gudang)</h4>
 				<div class="data-tables datatable-dark">
 					
@@ -32,11 +32,11 @@ require 'cek.php';
                                     </thead>
                                     <tbody>
                                     <?php
-                                        $ambilsemuadatabiaya = mysqli_query($conn, "select * from biaya i,bahanbaku b,tenagakerja t where b.id_bahan=i.id_bahan and t.id_tenaga_kerja=i.Id_Tenaga_Kerja");
+                                        $ambilsemuadatabiaya = mysqli_query($conn, "select * from biaya i,bahanbaku b,tenagakerja t where b.idbahan=i.idbahan and t.idtenaga=i.idtenaga");
                                         while($data=mysqli_fetch_array($ambilsemuadatabiaya)){
-                                            $idbiaya = $data['Id_Biaya_Produksi'];
-                                            $idb = $data['id_bahan'];
-                                            $idt = $data['Id_Tenaga_Kerja'];
+                                            $idbiaya = $data['idbiaya'];
+                                            $idb = $data['idbahan'];
+                                            $idt = $data['idtenaga'];
                                         ?>
                                         <tr>
                                             <td><?=$idbiaya;?></td>

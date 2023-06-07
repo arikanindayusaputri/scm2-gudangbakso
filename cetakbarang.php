@@ -18,38 +18,39 @@ require 'cek.php';
 <body>
 <div class="container">
 			<h2>PT MAYORA</h2>
-			<h4>(Data Bahan Baku)</h4>
+			<h4>(Data Gudang)</h4>
 				<div class="data-tables datatable-dark">
 					
-                            <div class="card-body">
+                <div class="card-body">
                                 <table id="mauexport">
                                     <thead>
                                         <tr>
-                                            <th>Id Bahan</th>
-                                            <th>Nama Bahan</th>
-                                            <th>Jumlah</th>
+                                            <th>Id Barang</th>
+                                            <th>Id Kategori Barang</th>
+                                            <th>Nama Barang</th>
                                             <th>Harga</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                        $ambilsemuadatabahan = mysqli_query($conn, "select * from bahanbaku");
-                                        while($data=mysqli_fetch_array($ambilsemuadatabahan)){
-                                            $idbahan = $data['idbahan'];
-                                            $namabahan = $data['nama'];
-                                            $jumlahbahan = $data['jumlah'];
-                                            $hargabahan =$data['harga'];
+                                        $ambilsemuadatagudang = mysqli_query($conn, "select * from barang");
+                                        while($data=mysqli_fetch_array($ambilsemuadatagudang)){
+                                            $idb = $data['idbarang'];
+                                            $idk = $data['idkategori'];
+                                            $namab = $data['nama'];
+                                            $harga =$data['harga'];
                                         ?>
                                         <tr>
-                                            <td><?=$idbahan;?></td>
-                                            <td><?=$namabahan;?></td>
-                                            <td><?=$jumlahbahan;?></td>
-                                            <td><?=$hargabahan;?></td>
+                                            <td><?=$idb;?></td>
+                                            <td><?=$idk;?></td>
+                                            <td><?=$namab;?></td>
+                                            <td><?=$harga;?></td>
                                         </tr>
+                                            
+                                        <?php
+                                        };
+                                        ?>
                                         
-                                    <?php
-                                    };
-                                    ?>
                                     </tbody>
                                 </table>
                             </div>

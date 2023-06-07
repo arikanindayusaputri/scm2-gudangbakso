@@ -18,38 +18,38 @@ require 'cek.php';
 <body>
 <div class="container">
 			<h2>PT MAYORA</h2>
-			<h4>(Data Bahan Baku)</h4>
+			<h4>(Data Produksi)</h4>
 				<div class="data-tables datatable-dark">
 					
-                            <div class="card-body">
+                <div class="card-body">
                                 <table id="mauexport">
                                     <thead>
                                         <tr>
-                                            <th>Id Bahan</th>
-                                            <th>Nama Bahan</th>
-                                            <th>Jumlah</th>
-                                            <th>Harga</th>
+                                            <th>Id Produksi</th>
+                                            <th>Id Barang</th>
+                                            <th>Id Biaya Produksi</th>
+                                            <th>Jumlah Produksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                        $ambilsemuadatabahan = mysqli_query($conn, "select * from bahanbaku");
-                                        while($data=mysqli_fetch_array($ambilsemuadatabahan)){
-                                            $idbahan = $data['idbahan'];
-                                            $namabahan = $data['nama'];
-                                            $jumlahbahan = $data['jumlah'];
-                                            $hargabahan =$data['harga'];
+                                        $ambilsemuadatabiaya = mysqli_query($conn, "select * from produksi p,barang b,biaya i where p.idbarang=b.idbarang and p.idbiaya=i.idbiaya");
+                                        while($data=mysqli_fetch_array($ambilsemuadatabiaya)){
+                                            $idpro = $data['idproduksi'];
+                                            $idbar = $data['idbarang'];
+                                            $idbi = $data['idbiaya'];
+                                            $jml =$data['jumlahproduksi'];
                                         ?>
                                         <tr>
-                                            <td><?=$idbahan;?></td>
-                                            <td><?=$namabahan;?></td>
-                                            <td><?=$jumlahbahan;?></td>
-                                            <td><?=$hargabahan;?></td>
+                                            <td><?=$idpro;?></td>
+                                            <td><?=$idbar;?></td>
+                                            <td><?=$idbi;?></td>
+                                            <td><?=$jml;?></td>
                                         </tr>
                                         
-                                    <?php
-                                    };
-                                    ?>
+                                        <?php
+                                        };
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

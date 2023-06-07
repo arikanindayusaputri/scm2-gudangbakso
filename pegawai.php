@@ -10,7 +10,7 @@ require 'cek.php';
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Barang</title>
+        <title>Pegawai</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -66,7 +66,7 @@ require 'cek.php';
                             <a class="nav-link" href="biaya.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Biaya Produksi
-                            </a>  
+                            </a>
                             <a class="nav-link" href="logout.php">
                                 LogOut
                             </a>
@@ -82,7 +82,7 @@ require 'cek.php';
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Data Barang</h1>
+                        <h1 class="mt-4">Data Pegawai</h1>
 
                         <!-- <div class="row">
                             <div class="col-md">
@@ -98,96 +98,95 @@ require 'cek.php';
                                     Tambah Data
                                 </button>
                                 
-                                <a href="cetakbarang.php" class="btn btn-success">Cetak Data</a> 
-                            </div> 
+                                <a href="cetakpegawai.php" class="btn btn-success">Cetak Data</a> 
+                            </div>
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
-                                            <th>Id Barang</th>
-                                            <th>Id Kategori Barang</th>
-                                            <th>Nama Barang</th>
-                                            <th>Harga</th>
-                                            <th>Aksi</th>
+                                            <th>Id Pegawai</th>
+                                            <th>Nama Pegawai</th>
+                                            <th>Alamat</th>
+                                            <th>No Telp</th>
+                                            <th>Akksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                        $ambilsemuadatagudang = mysqli_query($conn, "select * from barang");
-                                        while($data=mysqli_fetch_array($ambilsemuadatagudang)){
-                                            $idb = $data['idbarang'];
-                                            $idk = $data['idkategori'];
-                                            $namab = $data['nama'];
-                                            $harga =$data['harga'];
+                                        $ambilsemuadatapegawai = mysqli_query($conn, "select * from pegawai");
+                                        while($data=mysqli_fetch_array($ambilsemuadatapegawai)){
+                                            $idp = $data['idpegawai'];
+                                            $namapegawai = $data['namapegawai'];
+                                            $alamat = $data['alamat'];
+                                            $telp = $data['telp'];
                                         ?>
                                         <tr>
-                                            <td><?=$idb;?></td>
-                                            <td><?=$idk;?></td>
-                                            <td><?=$namab;?></td>
-                                            <td><?=$harga;?></td>
+                                            <td><?=$idp; ?></td>
+                                            <td><?=$namapegawai; ?></td>
+                                            <td><?=$alamat; ?></td>
+                                            <td><?=$telp; ?></td>
                                             <td>
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?=$idb;?>">
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?=$idp;?>">
                                                    Edit
                                                  </button>
                                                 <!-- <input type="hidden" name="idygmaudihapus" value="<?=$id;?>"> -->
-                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?=$idb;?>">
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?=$idp;?>">
                                                   Delete
                                                 </button>
                                             </td>
                                         </tr>
-                                            <!-- Edit Modal -->
-                                            <div class="modal fade" id="edit<?=$idb;?>">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
+                                         <!-- Edit Modal -->
+                                         <div class="modal fade" id="edit<?=$idp;?>">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
 
-                                                    <!-- Modal Header -->
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Edit Data</h4>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                    </div>
-
-                                                    <!-- Modal body -->
-                                                    <form method="post">
-                                                    <div class="modal-body">
-                                                        <input type="text" name="idbarang" value="<?=$idb;?>" class="form-control"required><br>
-                                                        <input type="text" name="idkategori" value="<?=$idk;?>" class="form-control"required><br>
-                                                        <input type="text" name="nama" value="<?=$namab;?>" class="form-control"required><br>
-                                                        <input type="text" name="harga" value="<?=$harga;?>" class="form-control"required><br>
-                                                        <input type ="hidden" name="idbarang" value="<?=$idb;?>">
-                                                        <button type="submit" class="btn btn-primary" name="updatebahan">submit</button>
-                                                    </div>
-                                                    </form>
-                                                    </div>
-                                                </div>
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Edit Data</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                                 </div>
 
-                                                <!-- Hapus Modal -->
-                                            <div class="modal fade" id="delete<?=$idb;?>">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-
-                                                    <!-- Modal Header -->
-                                                    <div class="modal-header">
-                                                        <h4 class="modal-title">Hapus Data</h4>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                                    </div>
-
-                                                    <!-- Modal body -->
-                                                    <form method="post">
-                                                    <div class="modal-body">
-                                                        Apakah Anda Yakin Ingin Menghapus <?=$idb;?>?
-                                                        <input type="hidden" name="idbarang" value="<?=$idb;?>">
-                                                        <br><br>
-                                                        <button type="submit" class="btn btn-danger" name="hapusbahan">Hapus</button>
-                                                    </div>
-                                                    </form>
-                                                    </div>
+                                                <!-- Modal body -->
+                                                <form method="post">
+                                                <div class="modal-body">
+                                                    <input type="text" name="idpegawai" value="<?=$idp;?>" class="form-control"required><br>
+                                                    <input type="text" name="namapegawai" value="<?=$namapegawai;?>" class="form-control"required><br>
+                                                    <input type="text" name="alamat" value="<?=$alamat;?>" class="form-control"required><br>
+                                                    <input type="text" name="telp" value="<?=$telp;?>" class="form-control"required><br>
+                                                    <input type ="hidden" name="idpegawai" value="<?=$idp;?>">
+                                                    <button type="submit" class="btn btn-primary" name="updatepegawai">submit</button>
                                                 </div>
+                                                </form>
                                                 </div>
+                                            </div>
+                                            </div>
+
+                                            <!-- Hapus Modal -->
+                                        <div class="modal fade" id="delete<?=$idp;?>">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+
+                                                <!-- Modal Header -->
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Hapus Data</h4>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                                </div>
+
+                                                <!-- Modal body -->
+                                                <form method="post">
+                                                <div class="modal-body">
+                                                    Apakah Anda Yakin Ingin Menghapus <?=$idp;?>?
+                                                    <input type="hidden" name="idpegawai" value="<?=$idp;?>">
+                                                    <br><br>
+                                                    <button type="submit" class="btn btn-danger" name="hapuspegawai">Hapus</button>
+                                                </div>
+                                                </form>
+                                                </div>
+                                            </div>
+                                            </div>
                                         <?php
                                         };
                                         ?>
-                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -216,6 +215,7 @@ require 'cek.php';
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
     </body>
+
         <!-- The Modal -->
         <div class="modal fade" id="myModal">
         <div class="modal-dialog">
@@ -230,11 +230,11 @@ require 'cek.php';
             <!-- Modal body -->
             <form method="post">
             <div class="modal-body">
-                <input type="text" name="idbarang" placeholder="Id Barang" class="form-control"><br>
-                <input type="text" name="idkategori" placeholder="Id Kategori Barang" class="form-control"><br>
-                <input type="text" name="nama" placeholder="Nama Barang" class="form-control"><br>
-                <input type="text" name="harga" placeholder="Harga" class="form-control"><br>
-                <button type="submit" class="btn btn-primary" name="addbarang">submit</button>
+                <input type="text" name="idpegawai" placeholder="Id Pegawai" class="form-control"><br>
+                <input type="text" name="namapegawai" placeholder="Nama Pegawai" class="form-control"><br>
+                <input type="text" name="alamat" placeholder="Alamat" class="form-control"><br>
+                <input type="text" name="telp" placeholder="No Telp" class="form-control"><br>
+                <button type="submit" class="btn btn-primary" name="addpegawai">submit</button>
             </div>
             </form>
 

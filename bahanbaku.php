@@ -115,8 +115,8 @@ require 'cek.php';
                                     <?php
                                         $ambilsemuadatabahan = mysqli_query($conn, "select * from bahanbaku");
                                         while($data=mysqli_fetch_array($ambilsemuadatabahan)){
-                                            $idbahan = $data['id_bahan'];
-                                            $namabahan = $data['Nama_Bahan'];
+                                            $idbahan = $data['idbahan'];
+                                            $namabahan = $data['nama'];
                                             $jumlahbahan = $data['jumlah'];
                                             $hargabahan =$data['harga'];
                                         ?>
@@ -149,11 +149,11 @@ require 'cek.php';
                                                 <!-- Modal body -->
                                                 <form method="post">
                                                 <div class="modal-body">
-                                                    <input type="text" name="id_bahan" value="<?=$idbahan;?>" class="form-control"required><br>
-                                                    <input type="text" name="Nama_Bahan" value="<?=$namabahan;?>" class="form-control"required><br>
+                                                    <input type="text" name="idbahan" value="<?=$idbahan;?>" class="form-control"required><br>
+                                                    <input type="text" name="nama" value="<?=$namabahan;?>" class="form-control"required><br>
                                                     <input type="text" name="jumlah" value="<?=$jumlahbahan;?>" class="form-control"required><br>
                                                     <input type="text" name="harga" value="<?=$hargabahan;?>" class="form-control"required><br>
-                                                    <input type ="hidden" name="id_barang" value="<?=$idb;?>">
+                                                    <input type ="hidden" name="idbarang" value="<?=$idb;?>">
                                                     <button type="submit" class="btn btn-primary" name="updatebahan">submit</button>
                                                 </div>
                                                 </form>

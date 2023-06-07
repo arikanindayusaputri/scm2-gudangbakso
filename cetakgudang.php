@@ -17,7 +17,7 @@ require 'cek.php';
 
 <body>
 <div class="container">
-			<h2>Gudang Bakso</h2>
+			<h2>PT MAYORA</h2>
 			<h4>(Data Gudang)</h4>
 				<div class="data-tables datatable-dark">
 					

@@ -18,38 +18,38 @@ require 'cek.php';
 <body>
 <div class="container">
 			<h2>PT MAYORA</h2>
-			<h4>(Data Bahan Baku)</h4>
+			<h4>(Data Gudang)</h4>
 				<div class="data-tables datatable-dark">
 					
-                            <div class="card-body">
+                <div class="card-body">
                                 <table id="mauexport">
                                     <thead>
                                         <tr>
-                                            <th>Id Bahan</th>
-                                            <th>Nama Bahan</th>
-                                            <th>Jumlah</th>
-                                            <th>Harga</th>
+                                            <th>Id Outlet</th>
+                                            <th>Id Pegawai</th>
+                                            <th>Id Barang</th>
+                                            <th>Lokasi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                        $ambilsemuadatabahan = mysqli_query($conn, "select * from bahanbaku");
-                                        while($data=mysqli_fetch_array($ambilsemuadatabahan)){
-                                            $idbahan = $data['idbahan'];
-                                            $namabahan = $data['nama'];
-                                            $jumlahbahan = $data['jumlah'];
-                                            $hargabahan =$data['harga'];
+                                        $ambilsemuadatabiaya = mysqli_query($conn, "select * from outlet o,pegawai p,barang b where o.idpegawai=p.idpegawai and o.idbarang=b.idbarang");
+                                        while($data=mysqli_fetch_array($ambilsemuadatabiaya)){
+                                            $ido = $data['idoutlet'];
+                                            $idp = $data['idpegawai'];
+                                            $idbar = $data['idbarang'];
+                                            $lok =$data['lokasi'];
                                         ?>
                                         <tr>
-                                            <td><?=$idbahan;?></td>
-                                            <td><?=$namabahan;?></td>
-                                            <td><?=$jumlahbahan;?></td>
-                                            <td><?=$hargabahan;?></td>
+                                            <td><?=$ido;?></td>
+                                            <td><?=$idp;?></td>
+                                            <td><?=$idbar;?></td>
+                                            <td><?=$lok;?></td>
                                         </tr>
-                                        
-                                    <?php
-                                    };
-                                    ?>
+                                        <?php
+                                        };
+                                        ?>
+                
                                     </tbody>
                                 </table>
                             </div>

@@ -10,7 +10,7 @@ require 'cek.php';
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>Barang</title>
+        <title>Stock</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
@@ -66,7 +66,7 @@ require 'cek.php';
                             <a class="nav-link" href="biaya.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Biaya Produksi
-                            </a>  
+                            </a>
                             <a class="nav-link" href="logout.php">
                                 LogOut
                             </a>
@@ -82,7 +82,7 @@ require 'cek.php';
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Data Barang</h1>
+                        <h1 class="mt-4">Data Stock Barang</h1>
 
                         <!-- <div class="row">
                             <div class="col-md">
@@ -98,45 +98,42 @@ require 'cek.php';
                                     Tambah Data
                                 </button>
                                 
-                                <a href="cetakbarang.php" class="btn btn-success">Cetak Data</a> 
+                                <a href="cetakstok.php" class="btn btn-success">Cetak Data</a>  
                             </div> 
                             <div class="card-body">
                                 <table id="datatablesSimple">
                                     <thead>
                                         <tr>
+                                            <th>Id Stock Barang</th>
                                             <th>Id Barang</th>
-                                            <th>Id Kategori Barang</th>
-                                            <th>Nama Barang</th>
-                                            <th>Harga</th>
+                                            <th>Jumlah</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                        $ambilsemuadatagudang = mysqli_query($conn, "select * from barang");
-                                        while($data=mysqli_fetch_array($ambilsemuadatagudang)){
-                                            $idb = $data['idbarang'];
-                                            $idk = $data['idkategori'];
-                                            $namab = $data['nama'];
-                                            $harga =$data['harga'];
+                                        $ambilsemuadatabiaya = mysqli_query($conn, "select * from stokb s,barang b where s.idbarang=b.idbarang");
+                                        while($data=mysqli_fetch_array($ambilsemuadatabiaya)){
+                                            $idsb = $data['idstokbarang'];
+                                            $idbar = $data['idbarang'];
+                                            $jumlah = $data['jumlah'];
                                         ?>
                                         <tr>
-                                            <td><?=$idb;?></td>
-                                            <td><?=$idk;?></td>
-                                            <td><?=$namab;?></td>
-                                            <td><?=$harga;?></td>
+                                            <td><?=$idsb;?></td>
+                                            <td><?=$idbar;?></td>
+                                            <td><?=$jumlah;?></td>
                                             <td>
-                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?=$idb;?>">
+                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#edit<?=$idsb;?>">
                                                    Edit
                                                  </button>
                                                 <!-- <input type="hidden" name="idygmaudihapus" value="<?=$id;?>"> -->
-                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?=$idb;?>">
+                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete<?=$idsb;?>">
                                                   Delete
                                                 </button>
                                             </td>
                                         </tr>
-                                            <!-- Edit Modal -->
-                                            <div class="modal fade" id="edit<?=$idb;?>">
+                                        <!-- Edit Modal -->
+                                        <div class="modal fade" id="edit<?=$idsb;?>">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
 
@@ -149,12 +146,11 @@ require 'cek.php';
                                                     <!-- Modal body -->
                                                     <form method="post">
                                                     <div class="modal-body">
-                                                        <input type="text" name="idbarang" value="<?=$idb;?>" class="form-control"required><br>
-                                                        <input type="text" name="idkategori" value="<?=$idk;?>" class="form-control"required><br>
-                                                        <input type="text" name="nama" value="<?=$namab;?>" class="form-control"required><br>
-                                                        <input type="text" name="harga" value="<?=$harga;?>" class="form-control"required><br>
-                                                        <input type ="hidden" name="idbarang" value="<?=$idb;?>">
-                                                        <button type="submit" class="btn btn-primary" name="updatebahan">submit</button>
+                                                        <input type="text" name="idstokbarang" value="<?=$idsb;?>" class="form-control"required><br>
+                                                        <input type="text" name="idbarang" value="<?=$idbar;?>" class="form-control"required><br>
+                                                        <input type="text" name="jumlah" value="<?=$jumlah;?>" class="form-control"required><br>
+                                                        <input type ="hidden" name="idbarang" value="<?=$idbar;?>">
+                                                        <button type="submit" class="btn btn-primary" name="updatesb">submit</button>
                                                     </div>
                                                     </form>
                                                     </div>
@@ -162,7 +158,7 @@ require 'cek.php';
                                                 </div>
 
                                                 <!-- Hapus Modal -->
-                                            <div class="modal fade" id="delete<?=$idb;?>">
+                                            <div class="modal fade" id="delete<?=$idsb;?>">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
 
@@ -175,19 +171,18 @@ require 'cek.php';
                                                     <!-- Modal body -->
                                                     <form method="post">
                                                     <div class="modal-body">
-                                                        Apakah Anda Yakin Ingin Menghapus <?=$idb;?>?
-                                                        <input type="hidden" name="idbarang" value="<?=$idb;?>">
+                                                        Apakah Anda Yakin Ingin Menghapus <?=$idsb;?>?
+                                                        <input type="hidden" name="idstokbarang" value="<?=$idsb;?>">
                                                         <br><br>
-                                                        <button type="submit" class="btn btn-danger" name="hapusbahan">Hapus</button>
+                                                        <button type="submit" class="btn btn-danger" name="hapussb">Hapus</button>
                                                     </div>
                                                     </form>
                                                     </div>
                                                 </div>
                                                 </div>
-                                        <?php
+                                    <?php
                                         };
-                                        ?>
-                                        
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -216,6 +211,7 @@ require 'cek.php';
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
     </body>
+
         <!-- The Modal -->
         <div class="modal fade" id="myModal">
         <div class="modal-dialog">
@@ -230,11 +226,22 @@ require 'cek.php';
             <!-- Modal body -->
             <form method="post">
             <div class="modal-body">
-                <input type="text" name="idbarang" placeholder="Id Barang" class="form-control"><br>
-                <input type="text" name="idkategori" placeholder="Id Kategori Barang" class="form-control"><br>
-                <input type="text" name="nama" placeholder="Nama Barang" class="form-control"><br>
-                <input type="text" name="harga" placeholder="Harga" class="form-control"><br>
-                <button type="submit" class="btn btn-primary" name="addbarang">submit</button>
+                <input type="text" name="idstokbarang" placeholder="Id Stock Barang" class="form-control"><br>
+                <select name="idbar" class="form-control">
+                    <?php
+                        $ambildata =mysqli_query($conn,"select *from barang");
+                        while($fetcharray =mysqli_fetch_array($ambildata)){
+                            $idb =$fetcharray['idbarang'];
+                            $idb =$fetcharray['idbarang'];
+                    ?>
+
+                    <option value="<?=$idb;?>"><?=$idb;?></option>
+                    <?php
+                        }
+                    ?>
+                </select><br>
+                <input type="text" name="jumlah" placeholder="Jumlah" class="form-control"><br>
+                <button type="submit" class="btn btn-primary" name="addstokb">submit</button>
             </div>
             </form>
 
